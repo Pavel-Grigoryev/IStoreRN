@@ -1,9 +1,11 @@
 import React from 'react';
-import {HEIGHT, PADDING, WIDTH} from './src/constants/constants';
+import {PADDING, WIDTH} from './src/constants/constants';
 import {FlatList, Image, ListRenderItem, Platform, Pressable, StyleSheet, Text, View} from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import {BasketIcon} from './src/componets/common/SvgIcons/BasketIcon';
 import {Header} from './src/componets/Header/Header';
+import {Footer} from './src/componets/Footer/Footer';
+import {EmptyPage} from './src/componets/EmptyPage/EmptyPage';
 
 const images = [
     require('./assets/Iphone13_128.png'),
@@ -62,12 +64,14 @@ export default function App() {
             <FlatList data={itemsData}
                       renderItem={renderItem}
                       numColumns={2}
-                      contentContainerStyle={{paddingHorizontal: PADDING}}
+                      contentContainerStyle={{paddingHorizontal: PADDING, flexGrow: 1}}
                       columnWrapperStyle={{justifyContent: 'space-between'}}
                       ListHeaderComponent={Header}
                       ListHeaderComponentStyle={styles.header}
                       stickyHeaderIndices={[0]}
-
+                      ListFooterComponent={Footer}
+                      ListFooterComponentStyle={styles.footer}
+                      ListEmptyComponent={EmptyPage}
             />
         </View>
     );
@@ -117,6 +121,11 @@ const styles = StyleSheet.create({
         marginHorizontal: -PADDING,
         backgroundColor: '#21201E',
         marginBottom: 18
+    },
+    footer: {
+        marginHorizontal: -PADDING,
+        backgroundColor: '#21201E',
+        marginTop: 42,
     },
 
 });
